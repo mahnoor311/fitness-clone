@@ -186,6 +186,20 @@ nav ul li a:hover {
   box-shadow: 0 8px 20px rgba(22,160,133,0.4);  /* ✅ Always green shadow */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+@media(max-width: 480px) {
+  .bmi-calculator {
+    max-width: 95%;     /* ✅ Mobile screen par aur reduce */
+    padding: 15px;
+  }
+
+  .bmi-calculator h2 {
+    font-size: 20px;
+  }
+
+  .bmi-calculator p {
+    font-size: 14px;
+  }
+}
 
 /* Hover Effect */
 .bmi-calculator:hover {
@@ -557,3 +571,4 @@ function calculateBMI() {
 
 </body>
 </html>
+
