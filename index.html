@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitLife – Your Fitness Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+  body { line-height:1.6; background:#fefefe; color:#333; }
+  a { text-decoration:none; color:inherit; }
+  img { max-width:100%; display:block; }
+
+  nav {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:15px 40px; background:#ffffff; box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    position:sticky; top:0; z-index:1000;
+  }
+  nav .logo { font-weight:700; font-size:28px; color:#16a085; }
+  nav ul { list-style:none; display:flex; gap:25px; }
+  /* Navbar Hover Glow */
+nav ul li a {
+  position: relative;
+  transition: color 0.3s;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background: #16a085;
+  transition: 0.3s;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav ul li a:hover {
+  color: #16a085;
+  text-shadow: 0 0 8px #16a085;
+}
+
+/* Hero Section with Background Image */
+.hero {
+  text-align: center;
+  padding: 150px 20px;
+  background: url('https://images.unsplash.com/photo-1594737625785-1eaf8f9f91e3?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+  color: white;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4); /* Dark overlay for text readability */
+}
+
+.hero h1, .hero p, .hero .cta-btn {
+  position: relative; /* above overlay */
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+}
+
+/* Glow effect on cards */
+.plan-card, .exercise-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.plan-card:hover, .exercise-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px rgba(22,160,133,0.6);
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* full screen height */
+  background: url('./hero3.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.4); /* dark overlay for text readability */
+}
+
+/* Gradient text animation */
+.hero h1, .hero p {
+  background: linear-gradient(90deg, #ffffff, #16a085, #ffffff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 3s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero text fade-in animation */
+.hero h1 {
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+}
+
+.hero p {
+  animation: fadeInUp 2s ease forwards;
+  opacity: 0;
+  animation-delay: 0.5s;
+}
+
+.hero .cta-btn {
+  animation: fadeInUp 2.5s ease forwards;
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+/* FadeInUp keyframes */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+.hero .cta-btn {
+  margin-top: 20px;
+  padding: 15px 35px;
+  background: #16a085;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.hero .cta-btn:hover {
+  background: #138d75;
+  box-shadow: 0 0 20px #16a085;
+}
+
+
+  section { padding:60px 50px; }
+  section h2 { font-size:32px; margin-bottom:20px; color:#16a085; text-align:center; }
+  section p { font-size:18px; color:#555; margin-bottom:25px; text-align:center; max-width:700px; margin-left:auto; margin-right:auto; }
+
+  /* .bmi-calculator { text-align:center; max-width:500px; margin:auto; background:white; padding:30px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05); } */
+  .bmi-calculator input { padding:12px; margin:10px 5px; border-radius:5px; border:1px solid #ccc; width:120px; }
+  .bmi-calculator button { padding:12px 25px; background:#16a085; color:white; border:none; border-radius:5px; cursor:pointer; transition:0.3s; }
+  .bmi-calculator button:hover { background:#138d75; }
+  .bmi-result { margin-top:20px; font-size:18px; font-weight:500; color:#333; background:#f8f9fa; padding:20px; border-radius:10px; text-align:left; }
+/* BMI Calculator Styling */
+.bmi-calculator {
+  text-align: center;
+  max-width: 500px;
+   margin: 0 auto 60px auto;   
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  border: 2px solid #16a085;   /* ✅ Always green border */
+  box-shadow: 0 8px 20px rgba(22,160,133,0.4);  /* ✅ Always green shadow */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover Effect */
+.bmi-calculator:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(22,160,133,0.6); /* Stronger shadow on hover */
+  animation: pulse 1.5s infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(22,160,133,0.6); }
+  50% { box-shadow: 0 0 25px rgba(22,160,133,0.8); }
+  100% { box-shadow: 0 0 10px rgba(22,160,133,0.6); }
+}
+
+
+  .plans { display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:40px; }
+  .plan-card { background:white; padding:30px; border-radius:12px; border:2px solid #16a085; width:250px; text-align:center; transition:0.3s; }
+  .plan-card:hover { transform:translateY(-8px); box-shadow:0 10px 20px rgba(0,0,0,0.08); }
+  .plan-card h3 { margin-bottom:15px; color:#16a085; }
+  .plan-card p { margin-bottom:20px; font-size:16px; color:#555; }
+  .plan-card button { padding:12px 20px; background:#16a085; color:white; border:none; border-radius:5px; cursor:pointer; }
+  .plan-card button:hover { background:#138d75; }
+.plan-card, .exercise-card {
+  transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+}
+
+.plan-card:hover, .exercise-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 25px rgba(22,160,133,0.6);
+  border: 2px solid #16a085;
+}
+
+  .highlight { border:3px solid #ff5733; box-shadow:0 0 15px rgba(255,87,51,0.5); }
+
+  @media(max-width:768px){ 
+    nav { flex-direction:column; gap:10px; }
+    .hero h1 { font-size:36px; }
+    .hero p { font-size:18px; }
+    .plans { flex-direction:column; align-items:center; }
+  }
+  /* Exercises Section */
+#exercises {
+  padding: 60px 50px;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+#exercises h2 {
+  font-size: 32px;
+  color: #16a085;
+  margin-bottom: 20px;
+}
+
+#exercises p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.exercise-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.exercise-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  width: 250px;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.exercise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.exercise-card img {
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+/* Hover Effect */
+.exercise-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(22,160,133,0.6); /* Stronger glow */
+  animation: pulse 1.5s infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(22,160,133,0.6); }
+  50% { box-shadow: 0 0 25px rgba(22,160,133,0.8); }
+  100% { box-shadow: 0 0 10px rgba(22,160,133,0.6); }
+}
+.exercise-card h3 {
+  color: #16a085;
+  margin-bottom: 10px;
+}
+
+.exercise-card p {
+  font-size: 16px;
+  color: #555;
+}
+
+
+/* Responsive */
+@media(max-width:768px) {
+  .exercise-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+  /* Contact Section */
+#contact {
+  background: #e8f8f5;
+  padding: 60px 20px;
+  text-align: center;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 50px auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+#contact h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #16a085;
+}
+
+#contact p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+#contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#contact input,
+#contact textarea {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  border-color: #16a085;
+  outline: none;
+}
+
+#contact button {
+  padding: 12px 25px;
+  background: #16a085;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#contact button:hover {
+  background: #138d75;
+}
+
+/* Responsive adjustments */
+@media(max-width:768px){
+  #contact {
+    padding: 40px 15px;
+  }
+  #contact h2 {
+    font-size: 28px;
+  }
+  #contact p {
+    font-size: 16px;
+  }
+}
+/* Footer */
+footer {
+  background: #16a085;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 3px solid #138d75;
+  margin-top: 50px;
+}
+
+footer p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+footer div a {
+  color: white;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+footer div a:hover {
+  color: #ffdd57;
+  text-decoration: underline;
+}
+
+/* Responsive Footer */
+@media(max-width:768px){
+  footer {
+    padding: 25px 15px;
+  }
+  footer p {
+    font-size: 14px;
+  }
+  footer div a {
+    display: inline-block;
+    margin: 5px 10px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">FitLife</div>
+  <ul>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#bmi">BMI</a></li>
+    <li><a href="#plans">Plans</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>FitLife – Your Fitness Companion</h1>
+  <p>Track workouts, monitor progress, and choose the right plan based on your BMI.</p>
+  <button class="cta-btn">Get Started</button>
+</section>
+
+
+<section id="features">
+  <h2>App Features</h2>
+  <p>Workout tracking, nutrition tips, and personalized fitness guidance all in one place.</p>
+</section>
+
+<section id="bmi" class="bmi-calculator">
+  <h2>BMI Calculator</h2>
+  <p>Enter your height and weight to check your BMI and recommended plan.</p>
+  <input type="number" id="height" placeholder="Height (cm)">
+  <input type="number" id="weight" placeholder="Weight (kg)">
+  <button onclick="calculateBMI()">Calculate</button>
+  <div class="bmi-result" id="bmiResult"></div>
+</section>
+
+<section id="exercises">
+  <h2>Fitness Exercises</h2>
+  <p>Simple daily exercises to stay fit and healthy at home or gym.</p>
+  <div class="exercise-cards">
+    <div class="exercise-card">
+      <img src="./push.webp" alt="Push-Ups">
+      <h3>Push-Ups</h3>
+      <p>Strengthen your chest, shoulders, and arms. Do 3 sets of 10–15 reps.</p>
+    </div>
+    <div class="exercise-card">
+      <img src="./SQUAT-GOODFORM_TOPPER-mediumSquareAt3X-v3.jpg" alt="Squats">
+      <h3>Squats</h3>
+      <p>Build leg and glute strength. Perform 3 sets of 15–20 reps.</p>
+    </div>
+    <div class="exercise-card">
+      <img src="./plank.jpg" alt="Plank">
+      <h3>Plank</h3>
+      <p>Core strengthening exercise. Hold for 30–60 seconds, 3 times.</p>
+    </div>
+    <div class="exercise-card">
+      <img src="./jack.jpg" alt="Jumping Jacks">
+      <h3>Jumping Jacks</h3>
+      <p>Cardio exercise for full-body warm-up. Do 3 sets of 30 reps.</p>
+    </div>
+  </div>
+</section>
+
+<section id="plans">
+  <h2>Recommended Plans</h2>
+  <div class="plans">
+    <div class="plan-card" id="gain">
+      <h3>Gain Weight Plan</h3>
+      <p>Perfect for underweight users to gain healthy weight.</p>
+      <p>Price: $25</p>
+      <button>Choose Plan</button>
+    </div>
+    <div class="plan-card" id="maintain">
+      <h3>Maintain Weight Plan</h3>
+      <p>Keep your weight stable and body fit.</p>
+      <p>Price: $25</p>
+      <button>Choose Plan</button>
+    </div>
+    <div class="plan-card" id="lose">
+      <h3>Lose Weight Plan</h3>
+      <p>For overweight or obese users to lose weight safely.</p>
+      <p>Price: $25</p>
+      <button>Choose Plan</button>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Subscribe to our newsletter for fitness tips and app updates.</p>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="4" placeholder="Your Message"></textarea>
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 FitLife. All Rights Reserved.</p>
+  <div>
+    <a href="#">Facebook</a> | 
+    <a href="#">Instagram</a> | 
+    <a href="#">Twitter</a>
+  </div>
+</footer>
+
+<script>
+function calculateBMI() {
+  const height = document.getElementById('height').value;
+  const weight = document.getElementById('weight').value;
+  if(height > 0 && weight > 0){
+    const heightM = height/100;
+    const bmi = (weight/(heightM*heightM)).toFixed(1);
+    let category='', suggestedPlan='';
+
+    if(bmi < 18.5) { category='Underweight'; suggestedPlan='gain'; }
+    else if(bmi < 24.9) { category='Normal weight'; suggestedPlan='maintain'; }
+    else { category='Overweight or Obese'; suggestedPlan='lose'; }
+
+    document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('highlight'));
+    document.getElementById(suggestedPlan).classList.add('highlight');
+
+    let suggestionText='';
+    if(category=='Underweight') suggestionText='Follow the Gain Weight Plan';
+    else if(category=='Normal weight') suggestionText='Follow the Maintain Weight Plan';
+    else suggestionText='Follow the Lose Weight Plan';
+
+    document.getElementById('bmiResult').innerHTML=
+      `Your BMI: <strong>${bmi} (${category})</strong><br>
+       <strong>Suggestion:</strong> ${suggestionText}`;
+  } else {
+    alert('Please enter valid height and weight');
+  }
+}
+</script>
+
+</body>
+</html>
